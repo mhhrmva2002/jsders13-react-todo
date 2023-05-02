@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react"; //hook
+import { todos } from "./data";
+import Search from "./components/Search";
+import Header from "./components/Header";
+import SortButton from "./components/SortButton";
+import AddToDo from "./components/AddToDo";
+import DeleteToDo from "./components/DeleteToDo";
 
 function App() {
+  const [todosState, setTodosState] = useState(todos);
+  const [todo,setTodo] = useState({name:''});
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header text="Todos"/>
+      <Search todosState={todosState} setTodosState={setTodosState} todos={todos} placeholder="search todo(s)"/>
+      <SortButton todosState={todosState} setTodosState={setTodosState}/>
+      <DeleteToDo todosState={todosState} setTodosState={setTodosState} text="delete"/>
+      <AddToDo todo={todo} setTodo={setTodo} todosState={todosState} setTodosState={setTodosState} text="Add todo item"/>
+    </>
   );
 }
 
